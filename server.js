@@ -34,7 +34,10 @@ pool.query('SELECT NOW()', (err, res) => {
 });
 
 // Middleware
-app.use(cors()); // Enable CORS for all origins (for development)
+app.use(cors({
+    credentials : true,
+    origin : process.env.FRONTEND_URL
+})) // Enable CORS for all origins (for development)
 app.use(express.json()); // Parse JSON request bodies
 
 // --- General API Routes ---
