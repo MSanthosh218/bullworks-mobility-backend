@@ -10,9 +10,16 @@ const PORT = process.env.PORT || 5000;
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE, // Ensure this matches 'bullwork_mobility_db'
+    database: process.env.DB_DATABASE,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
+    ssl: {
+        rejectUnauthorized: false // WARNING: Use 'rejectUnauthorized: false' for development/testing only.
+                                  // For production, always use 'rejectUnauthorized: true' and provide a CA certificate.
+        // For production, uncomment the line below and replace 'path/to/your/aiven_ca.pem'
+        // with the actual path to the Aiven CA certificate file you download.
+        // ca: fs.readFileSync('path/to/your/aiven_ca.pem').toString(),
+    },
 });
 
 // Test database connection
